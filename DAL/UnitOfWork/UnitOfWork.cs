@@ -18,6 +18,8 @@ namespace DAL.UnitOfWork
         private PlaneTypeRepository typeRepository;
         private TicketRepository ticketRepository;
 
+        private DataSource db = new DataSource();
+
         public IRepository<Flight> Flights
         {
             get
