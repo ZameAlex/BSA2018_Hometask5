@@ -20,77 +20,79 @@ namespace DAL.UnitOfWork
 
         private DataSource db = new DataSource();
 
-        public IRepository<Flight> Flights
+
+
+        public BaseRepository<Flight> Flights
         {
             get
             {
                 if (flightRepository == null)
-                    flightRepository = new FlightRepository();
+                    flightRepository = new FlightRepository(db);
                 return flightRepository;
             }
         }
 
-        public IRepository<Ticket> Tickets
+        public BaseRepository<Ticket> Tickets
         {
             get
             {
                 if (ticketRepository == null)
-                    ticketRepository = new TicketRepository();
+                    ticketRepository = new TicketRepository(db);
                 return ticketRepository;
             }
         }
 
-        public IRepository<Departure> Departures
+        public BaseRepository<Departure> Departures
         {
             get
             {
                 if (departureRepository == null)
-                    departureRepository = new DepartureRepository();
+                    departureRepository = new DepartureRepository(db);
                 return departureRepository;
             }
         }
-        public IRepository<Stewadress> Stewadresses
+        public BaseRepository<Stewadress> Stewadresses
         {
             get
             {
                 if (stewadressRepository == null)
-                    stewadressRepository = new StewadressRepository();
+                    stewadressRepository = new StewadressRepository(db);
                 return stewadressRepository;
             }
         }
-        public IRepository<Pilot> Pilots
+        public BaseRepository<Pilot> Pilots
         {
             get
             {
                 if (pilotRepository == null)
-                    pilotRepository = new PilotRepository();
+                    pilotRepository = new PilotRepository(db);
                 return pilotRepository;
             }
         }
-        public IRepository<Crew> Crew
+        public BaseRepository<Crew> Crew
         {
             get
             {
                 if (crewRepository == null)
-                    crewRepository = new CrewRepository();
+                    crewRepository = new CrewRepository(db);
                 return crewRepository;
             }
         }
-        public IRepository<Plane> Planes
+        public BaseRepository<Plane> Planes
         {
             get
             {
                 if (planeRepository == null)
-                    planeRepository = new PlaneRepository();
+                    planeRepository = new PlaneRepository(db);
                 return planeRepository;
             }
         }
-        public IRepository<PlaneType> Types
+        public BaseRepository<PlaneType> Types
         {
             get
             {
                 if (typeRepository == null)
-                    typeRepository = new PlaneTypeRepository();
+                    typeRepository = new PlaneTypeRepository(db);
                 return typeRepository;
             }
         }

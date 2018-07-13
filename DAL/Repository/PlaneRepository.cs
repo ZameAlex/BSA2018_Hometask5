@@ -5,36 +5,16 @@ using System.Text;
 
 namespace DAL.Repository
 {
-    public class PlaneRepository : IRepository<Plane>
+    public class PlaneRepository : BaseRepository<Plane>
     {
-        public void Create(Plane entity)
+        public PlaneRepository(DataSource db):base(db)
         {
-            throw new NotImplementedException();
+                
         }
 
-        public void Delete(Plane entity)
+        public void Update(TimeSpan expires,int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Plane> Get()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Plane> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Plane entity)
-        {
-            throw new NotImplementedException();
+            Get(id).Expired = expires;
         }
     }
 }

@@ -5,36 +5,11 @@ using System.Text;
 
 namespace DAL.Repository
 {
-    public class CrewRepository : IRepository<Crew>
+    public class CrewRepository : BaseRepository<Crew>
     {
-        public void Create(Crew entity)
+        public CrewRepository(DataSource db):base(db)
         {
-            throw new NotImplementedException();
-        }
 
-        public void Delete(Crew entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Crew> Get()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Crew> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Crew entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

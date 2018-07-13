@@ -10,7 +10,7 @@ namespace DAL.Repository
     {
         IEnumerable<TEntity> Get();
 
-        IEnumerable<TEntity> Get(int id);
+        TEntity Get(int id);
 
         void Create(TEntity entity);
 

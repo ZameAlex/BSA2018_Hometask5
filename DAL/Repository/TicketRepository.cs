@@ -5,36 +5,11 @@ using System.Text;
 
 namespace DAL.Repository
 {
-    public class TicketRepository : IRepository<Ticket>
+    public class TicketRepository : BaseRepository<Ticket>
     {
-        public void Create(Ticket entity)
+        public TicketRepository(DataSource db) : base(db)
         {
-            throw new NotImplementedException();
-        }
 
-        public void Delete(Ticket entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Ticket> Get()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Ticket> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Ticket entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

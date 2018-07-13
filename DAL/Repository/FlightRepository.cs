@@ -5,36 +5,19 @@ using System.Text;
 
 namespace DAL.Repository
 {
-    public class FlightRepository : IRepository<Flight>
+    public class FlightRepository : BaseRepository<Flight>
     {
-        public void Create(Flight entity)
+
+        public FlightRepository(DataSource db) : base(db)
         {
-            throw new NotImplementedException();
+
         }
 
-        public void Delete(Flight entity)
+        public void Update(DateTime departure, DateTime destination, int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Flight> Get()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Flight> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Flight entity)
-        {
-            throw new NotImplementedException();
+            var temp = Get(id);
+            temp.DepartureTime = departure;
+            temp.DestinationTime = destination;
         }
     }
 }

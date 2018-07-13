@@ -5,36 +5,17 @@ using System.Text;
 
 namespace DAL.Repository
 {
-    public class DepartureRepository : IRepository<Departure>
+    public class DepartureRepository : BaseRepository<Departure>
     {
-        public void Create(Departure entity)
+
+        public DepartureRepository(DataSource db):base(db)
         {
-            throw new NotImplementedException();
+                
         }
 
-        public void Delete(Departure entity)
+        public void Update(DateTime date, int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Departure> Get()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Departure> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Departure entity)
-        {
-            throw new NotImplementedException();
+            Get(id).Date = date;
         }
     }
 }
