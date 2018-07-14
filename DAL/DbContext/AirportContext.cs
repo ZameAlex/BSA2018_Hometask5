@@ -13,7 +13,7 @@ namespace BSA2018_Hometask4.DAL.DbContext
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server =.\SQLEXPRESS; Database = AirportDB; Trusted_Connection = True;");
+            optionsBuilder.UseSqlServer(@"Server = DESKTOP-5S77NGN; Database = AirportDB1; Trusted_Connection = True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,5 +30,24 @@ namespace BSA2018_Hometask4.DAL.DbContext
         public DbSet<Stewadress> Stewadresses { get; set; }
         public DbSet<Plane> Planes { get; set; }
         public DbSet<PlaneType> Types { get; set; }
+
+        public DbSet<TEntity> SetOf<TEntity>() where TEntity : Entity
+        {
+            if (Flights is IEnumerable<TEntity>)
+                return Flights as DbSet<TEntity>;
+            else if (Depatures is IEnumerable<TEntity>)
+                return Depatures as DbSet<TEntity>;
+            else if (Crew is IEnumerable<TEntity>)
+                return Crew as DbSet<TEntity>;
+            else if (Stewadresses is IEnumerable<TEntity>)
+                return Stewadresses as DbSet<TEntity>;
+            else if (Pilots is IEnumerable<TEntity>)
+                return Pilots as DbSet<TEntity>;
+            else if (Planes is IEnumerable<TEntity>)
+                return Planes as DbSet<TEntity>;
+            else if (Types is IEnumerable<TEntity>)
+                return Types as DbSet<TEntity>;
+            else return Tickets as DbSet<TEntity>;
+        }
     }
 }

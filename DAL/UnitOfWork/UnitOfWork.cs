@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using BSA2018_Hometask4.DAL.DbContext;
 using DAL.Models;
 using DAL.Repository;
 
@@ -18,8 +19,12 @@ namespace DAL.UnitOfWork
         private PlaneTypeRepository typeRepository;
         private TicketRepository ticketRepository;
 
-        private DataSource db = new DataSource();
+        private readonly AirportContext db = new AirportContext();
 
+        public UnitOfWork()
+        {
+            new DataSource(db);
+        }
 
         #region Repositories
         public BaseRepository<Flight> Flights
