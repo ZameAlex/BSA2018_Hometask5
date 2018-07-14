@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BSA2018_Hometask4.BLL.Interfaces;
+﻿using BSA2018_Hometask4.BLL.Interfaces;
 using BSA2018_Hometask4.Shared.DTO;
 using BSA2018_Hometask4.Shared.Exceptions;
 using DAL.Models;
@@ -28,7 +27,7 @@ namespace BSA2018_Hometask4.BLL.Services
         {
             var validationResult = validator.Validate(Type);
             if (validationResult.IsValid)
-                unit.Types.Create(mapper.Map<TypeDto, PlaneType>(Type));
+                unit.Types.Create(mapper.MapType(Type));
             else
                 throw new ValidationException(validationResult.Errors);
         }
@@ -40,17 +39,22 @@ namespace BSA2018_Hometask4.BLL.Services
 
         public void Delete(TypeDto Type)
         {
-            unit.Types.Delete(mapper.Map<TypeDto, PlaneType>(Type));
+            unit.Types.Delete(mapper.MapType(Type));
         }
 
         public TypeDto Get(int id)
         {
-            return mapper.Map<PlaneType, TypeDto>(unit.Types.Get(id));
+            return mapper.MapType(unit.Types.Get(id));
         }
 
         public List<TypeDto> Get()
         {
-            return mapper.Map<List<PlaneType>, List<TypeDto>>(unit.Types.Get());
+            var result = new List<TypeDto>();
+            foreach (var item in unit.Types.Get())
+            {
+                result.Add(mapper.MapType(item));
+            }
+            return result;
         }
 
         public void Update(TypeDto Type, int id)
@@ -60,7 +64,7 @@ namespace BSA2018_Hometask4.BLL.Services
                 throw new ValidationException(validationResult.Errors);
             try
             {
-                unit.Types.Update(mapper.Map<TypeDto, PlaneType>(Type), id);
+                unit.Types.Update(mapper.MapType(Type), id);
             }
             catch (ArgumentNullException)
             {

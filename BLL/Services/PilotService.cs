@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BSA2018_Hometask4.BLL.Interfaces;
+﻿using BSA2018_Hometask4.BLL.Interfaces;
 using BSA2018_Hometask4.Shared.DTO;
 using BSA2018_Hometask4.Shared.Exceptions;
 using DAL.Models;
@@ -28,7 +27,7 @@ namespace BSA2018_Hometask4.BLL.Services
         {
             var validationResult = validator.Validate(Pilot);
             if (validationResult.IsValid)
-                unit.Pilots.Create(mapper.Map<PilotDto, Pilot>(Pilot));
+                unit.Pilots.Create(mapper.MapPilot(Pilot));
             else
                 throw new ValidationException(validationResult.Errors);
             
@@ -41,17 +40,22 @@ namespace BSA2018_Hometask4.BLL.Services
 
         public void Delete(PilotDto Pilot)
         {
-            unit.Pilots.Delete(mapper.Map<PilotDto, Pilot>(Pilot));
+            unit.Pilots.Delete(mapper.MapPilot(Pilot));
         }
 
         public PilotDto Get(int id)
         {
-            return mapper.Map<Pilot, PilotDto>(unit.Pilots.Get(id));
+            return mapper.MapPilot(unit.Pilots.Get(id));
         }
 
         public List<PilotDto> Get()
         {
-            return mapper.Map<List<Pilot>, List<PilotDto>>(unit.Pilots.Get());
+            var result = new List<PilotDto>();
+            foreach (var item in unit.Pilots.Get())
+            {
+                result.Add(mapper.MapPilot(item));
+            }
+            return result;
         }
 
         public void Update(PilotDto Pilot, int id)
@@ -61,7 +65,7 @@ namespace BSA2018_Hometask4.BLL.Services
                 throw new ValidationException(validationResult.Errors);
             try
             {
-                unit.Pilots.Update(mapper.Map<PilotDto, Pilot>(Pilot), id);
+                unit.Pilots.Update(mapper.MapPilot(Pilot), id);
             }
             catch (ArgumentNullException)
             {

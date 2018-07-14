@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿
 using BSA2018_Hometask4.BLL.Interfaces;
 using BSA2018_Hometask4.Shared.DTO;
 using BSA2018_Hometask4.Shared.Exceptions;
@@ -28,7 +28,7 @@ namespace BSA2018_Hometask4.BLL.Services
         {
             var validationResult = validator.Validate(Plane);
             if (validationResult.IsValid)
-                unit.Planes.Create(mapper.Map<PlaneDto, Plane>(Plane));
+                unit.Planes.Create(mapper.MapPlane(Plane));
             else
                 throw new ValidationException(validationResult.Errors);
             
@@ -41,17 +41,22 @@ namespace BSA2018_Hometask4.BLL.Services
 
         public void Delete(PlaneDto Plane)
         {
-            unit.Planes.Delete(mapper.Map<PlaneDto, Plane>(Plane));
+            unit.Planes.Delete(mapper.MapPlane(Plane));
         }
 
         public PlaneDto Get(int id)
         {
-            return mapper.Map<Plane, PlaneDto>(unit.Planes.Get(id));
+            return mapper.MapPlane(unit.Planes.Get(id));
         }
 
         public List<PlaneDto> Get()
         {
-            return mapper.Map<List<Plane>, List<PlaneDto>>(unit.Planes.Get());
+            var result = new List<PlaneDto>();
+            foreach (var item in unit.Planes.Get())
+            {
+                result.Add(mapper.MapPlane(item));
+            }
+            return result;
         }
 
         public void Update(PlaneDto Plane, int id)
@@ -61,7 +66,7 @@ namespace BSA2018_Hometask4.BLL.Services
                 throw new ValidationException(validationResult.Errors);
             try
             {
-                unit.Planes.Update(mapper.Map<PlaneDto, Plane>(Plane), id);
+                unit.Planes.Update(mapper.MapPlane(Plane), id);
             }
             catch (ArgumentNullException)
             {

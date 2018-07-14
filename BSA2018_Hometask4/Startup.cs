@@ -16,7 +16,7 @@ using BSA2018_Hometask4.Shared.DTO;
 using BSA2018_Hometask4.BLL.Validators;
 using BSA2018_Hometask4.BLL;
 using DAL.UnitOfWork;
-using AutoMapper;
+using BSA2018_Hometask4.BLL.Mapping;
 
 namespace BSA2018_Hometask4
 {
@@ -54,9 +54,7 @@ namespace BSA2018_Hometask4
 
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
 
-            var mappingConfig = new Mapping();
-            var mapper = mappingConfig.ConfigureMapping().CreateMapper();
-            services.AddTransient(_ => mapper);
+            services.AddTransient<IMapper, Mapping>();
             
         }
 

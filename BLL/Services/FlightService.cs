@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BSA2018_Hometask4.BLL.Interfaces;
+﻿using BSA2018_Hometask4.BLL.Interfaces;
 using BSA2018_Hometask4.Shared.DTO;
 using BSA2018_Hometask4.Shared.Exceptions;
 using DAL.Models;
@@ -28,7 +27,7 @@ namespace BSA2018_Hometask4.BLL.Services
         {
             var validationResult = validator.Validate(flight);
             if (validationResult.IsValid)
-                unit.Flights.Create(mapper.Map<FlightDto, Flight>(flight));
+                unit.Flights.Create(mapper.MapFlight(flight));
             else
                 throw new ValidationException(validationResult.Errors);
         }
@@ -40,17 +39,22 @@ namespace BSA2018_Hometask4.BLL.Services
 
         public void Delete(FlightDto flight)
         {
-            unit.Flights.Delete(mapper.Map<FlightDto, Flight>(flight));
+            unit.Flights.Delete(mapper.MapFlight(flight));
         }
 
         public FlightDto Get(int id)
         {
-            return mapper.Map<Flight, FlightDto>(unit.Flights.Get(id));
+            return mapper.MapFlight(unit.Flights.Get(id));
         }
 
         public List<FlightDto> Get()
         {
-            return mapper.Map<List<Flight>, List<FlightDto>>(unit.Flights.Get());
+            var result = new List<FlightDto>();
+            foreach (var item in unit.Flights.Get())
+            {
+                result.Add(mapper.MapFlight(item));
+            }
+            return result;
         }
 
         public void Update(FlightDto flight, int id)
@@ -60,7 +64,7 @@ namespace BSA2018_Hometask4.BLL.Services
                 throw new ValidationException(validationResult.Errors);
             try
             {
-                unit.Flights.Update(mapper.Map<FlightDto, Flight>(flight), id);
+                unit.Flights.Update(mapper.MapFlight(flight), id);
             }
             catch (ArgumentNullException)
             {

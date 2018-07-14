@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BSA2018_Hometask4.BLL.Interfaces;
+﻿using BSA2018_Hometask4.BLL.Interfaces;
 using BSA2018_Hometask4.Shared.DTO;
 using DAL.Models;
 using DAL.Repository;
@@ -29,7 +28,7 @@ namespace BSA2018_Hometask4.BLL.Services
         {
             var validationResult = validator.Validate(departure);
             if (validationResult.IsValid)
-                unit.Departures.Create(mapper.Map<DepartureDto, Departure>(departure));
+                unit.Departures.Create(mapper.MapDeparture(departure));
             else
                 throw new ValidationException(validationResult.Errors);
             
@@ -42,17 +41,22 @@ namespace BSA2018_Hometask4.BLL.Services
 
         public void Delete(DepartureDto departure)
         {
-            unit.Departures.Delete(mapper.Map<DepartureDto, Departure>(departure));
+            unit.Departures.Delete(mapper.MapDeparture(departure));
         }
 
         public DepartureDto Get(int id)
         {
-            return mapper.Map<Departure, DepartureDto>(unit.Departures.Get(id));
+            return mapper.MapDeparture(unit.Departures.Get(id));
         }
 
         public List<DepartureDto> Get()
         {
-            return mapper.Map<List<Departure>, List<DepartureDto>>(unit.Departures.Get());
+            var result = new List<DepartureDto>();
+            foreach (var item in unit.Departures.Get())
+            {
+                result.Add(mapper.MapDeparture(item));
+            }
+            return result;
         }
 
         public void Update(DepartureDto departure, int id)
@@ -62,7 +66,7 @@ namespace BSA2018_Hometask4.BLL.Services
                 throw new ValidationException(validationResult.Errors);
             try
             {
-                unit.Departures.Update(mapper.Map<DepartureDto, Departure>(departure), id);
+                unit.Departures.Update(mapper.MapDeparture(departure), id);
             }
             catch (ArgumentNullException)
             {

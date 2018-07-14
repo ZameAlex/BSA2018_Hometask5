@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BSA2018_Hometask4.BLL.Interfaces;
+﻿using BSA2018_Hometask4.BLL.Interfaces;
 using BSA2018_Hometask4.Shared.DTO;
 using BSA2018_Hometask4.Shared.Exceptions;
 using DAL.Models;
@@ -28,7 +27,7 @@ namespace BSA2018_Hometask4.BLL.Services
         {
             var validationResult = validator.Validate(Stewadress);
             if (validationResult.IsValid)
-                unit.Stewadresses.Create(mapper.Map<StewadressDto, Stewadress>(Stewadress));
+                unit.Stewadresses.Create(mapper.MapStewadress(Stewadress));
             else
                 throw new ValidationException(validationResult.Errors);
 
@@ -41,17 +40,22 @@ namespace BSA2018_Hometask4.BLL.Services
 
         public void Delete(StewadressDto Stewadress)
         {
-            unit.Stewadresses.Delete(mapper.Map<StewadressDto, Stewadress>(Stewadress));
+            unit.Stewadresses.Delete(mapper.MapStewadress(Stewadress));
         }
 
         public StewadressDto Get(int id)
         {
-            return mapper.Map<Stewadress, StewadressDto>(unit.Stewadresses.Get(id));
+            return mapper.MapStewadress(unit.Stewadresses.Get(id));
         }
 
         public List<StewadressDto> Get()
         {
-            return mapper.Map<List<Stewadress>, List<StewadressDto>>(unit.Stewadresses.Get());
+            var result = new List<StewadressDto>();
+            foreach (var item in unit.Stewadresses.Get())
+            {
+                result.Add(mapper.MapStewadress(item));
+            }
+            return result;
         }
 
         public void Update(StewadressDto Stewadress, int id)
@@ -61,7 +65,7 @@ namespace BSA2018_Hometask4.BLL.Services
                 throw new ValidationException(validationResult.Errors);
             try
             {
-                unit.Stewadresses.Update(mapper.Map<StewadressDto, Stewadress>(Stewadress), id);
+                unit.Stewadresses.Update(mapper.MapStewadress(Stewadress), id);
             }
             catch (ArgumentNullException)
             {

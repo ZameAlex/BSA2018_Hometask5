@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿
 using BSA2018_Hometask4.BLL.Interfaces;
 using BSA2018_Hometask4.Shared.DTO;
 using BSA2018_Hometask4.Shared.Exceptions;
@@ -28,7 +28,7 @@ namespace BSA2018_Hometask4.BLL.Services
         {
             var validationResult = validator.Validate(Crew);
             if (validationResult.IsValid)
-                unit.Crew.Create(mapper.Map<CrewDto, Crew>(Crew));
+                unit.Crew.Create(mapper.MapCrew(Crew));
             else
                 throw new ValidationException(validationResult.Errors);
         }
@@ -40,17 +40,22 @@ namespace BSA2018_Hometask4.BLL.Services
 
         public void Delete(CrewDto Crew)
         {
-            unit.Crew.Delete(mapper.Map<CrewDto, Crew>(Crew));
+            unit.Crew.Delete(mapper.MapCrew(Crew));
         }
 
         public CrewDto Get(int id)
         {
-            return mapper.Map<Crew, CrewDto>(unit.Crew.Get(id));
+            return mapper.MapCrew(unit.Crew.Get(id));
         }
 
         public List<CrewDto> Get()
         {
-            return mapper.Map<List<Crew>, List<CrewDto>>(unit.Crew.Get());
+            var result = new List<CrewDto>();
+            foreach(var item in unit.Crew.Get())
+            {
+                result.Add(mapper.MapCrew(item));
+            }
+            return result;
         }
 
         public void Update(CrewDto Crew, int id)
@@ -60,7 +65,7 @@ namespace BSA2018_Hometask4.BLL.Services
                 throw new ValidationException(validationResult.Errors);
             try
             {
-                unit.Crew.Update(mapper.Map<CrewDto, Crew>(Crew), id);
+                unit.Crew.Update(mapper.MapCrew(Crew), id);
             }
             catch(ArgumentNullException)
             {

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BSA2018_Hometask4.BLL.Interfaces;
+﻿using BSA2018_Hometask4.BLL.Interfaces;
 using BSA2018_Hometask4.Shared.DTO;
 using BSA2018_Hometask4.Shared.Exceptions;
 using DAL.Models;
@@ -28,7 +27,7 @@ namespace BSA2018_Hometask4.BLL.Services
         {
             var validationResult = validator.Validate(Ticket);
             if (validationResult.IsValid)
-                unit.Tickets.Create(mapper.Map<TicketDto, Ticket>(Ticket));
+                unit.Tickets.Create(mapper.MapTicket(Ticket));
             else
                 throw new ValidationException(validationResult.Errors);
             
@@ -41,17 +40,22 @@ namespace BSA2018_Hometask4.BLL.Services
 
         public void Delete(TicketDto Ticket)
         {
-            unit.Tickets.Delete(mapper.Map<TicketDto, Ticket>(Ticket));
+            unit.Tickets.Delete(mapper.MapTicket(Ticket));
         }
 
         public TicketDto Get(int id)
         {
-            return mapper.Map<Ticket, TicketDto>(unit.Tickets.Get(id));
+            return mapper.MapTicket(unit.Tickets.Get(id));
         }
 
         public List<TicketDto> Get()
         {
-            return mapper.Map<List<Ticket>, List<TicketDto>>(unit.Tickets.Get());
+            var result = new List<TicketDto>();
+            foreach (var item in unit.Tickets.Get())
+            {
+                result.Add(mapper.MapTicket(item));
+            }
+            return result;
         }
 
         public void Update(TicketDto Ticket, int id)
@@ -61,7 +65,7 @@ namespace BSA2018_Hometask4.BLL.Services
                 throw new ValidationException(validationResult.Errors);
             try
             {
-                unit.Tickets.Update(mapper.Map<TicketDto, Ticket>(Ticket), id);
+                unit.Tickets.Update(mapper.MapTicket(Ticket), id);
             }
             catch (ArgumentNullException)
             {
