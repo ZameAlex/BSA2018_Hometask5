@@ -8,13 +8,13 @@ namespace DAL.Repository
 {
     public interface IRepository<TEntity> where TEntity:Entity
     {
-        IEnumerable<TEntity> Get();
+        List<TEntity> Get();
 
         TEntity Get(int id);
 
         void Create(TEntity entity);
 
-        void Update(TEntity entity);
+        void Update(TEntity entity, int id);
 
         void Delete(TEntity entity);
 

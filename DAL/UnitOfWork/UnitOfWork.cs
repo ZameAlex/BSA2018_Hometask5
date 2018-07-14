@@ -21,7 +21,7 @@ namespace DAL.UnitOfWork
         private DataSource db = new DataSource();
 
 
-
+        #region Repositories
         public BaseRepository<Flight> Flights
         {
             get
@@ -101,6 +101,7 @@ namespace DAL.UnitOfWork
         {
             
         }
+        #endregion
 
         public int SaveChanges()
         {

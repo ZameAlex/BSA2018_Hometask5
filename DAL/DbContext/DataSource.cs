@@ -15,9 +15,56 @@ public class DataSource
 
     public DataSource ()
     {
-        //Implement all sets
-    } 
-    
+        Flights = new List<Flight>();
+        Tickets = new List<Ticket>();
+        Crew = new List<Crew>();
+        Depatures = new List<Departure>();
+        Pilots = new List<Pilot>();
+        Stewadresses = new List<Stewadress>();
+        Planes = new List<Plane>();
+        Types = new List<PlaneType>();
+
+        #region Types initializing
+        Types.Add(
+            new PlaneType
+            {
+                Id=1,
+                Model="Model1",
+                FleightLength=9000,
+                MaxHeight=11000,
+                MaxMass=900,
+                Places=150,
+                Speed=900
+            }
+            );
+
+        Types.Add(
+            new PlaneType
+            {
+                Id = 2,
+                Model = "Model2",
+                FleightLength = 7500,
+                MaxHeight = 9000,
+                MaxMass = 1100,
+                Places = 218,
+                Speed = 800
+            }
+            );
+        Types.Add(
+            new PlaneType
+            {
+                Id = 1,
+                Model = "Model3",
+                FleightLength = 10000,
+                MaxHeight = 8000,
+                MaxMass = 80000,
+                Places = 90,
+                Speed = 900
+            }
+            );
+        #endregion
+    }
+
     public List<TEntity> SetOf<TEntity>() where TEntity: Entity
     {
         if (Flights is List<TEntity>)

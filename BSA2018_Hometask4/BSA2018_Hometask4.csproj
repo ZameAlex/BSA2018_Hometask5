@@ -10,6 +10,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BSA2018_Hometask4.BLL.csproj" />
+    <ProjectReference Include="..\BSA2018_Hometask4.Shared\BSA2018_Hometask4.Shared.csproj" />
   </ItemGroup>
 
 </Project>

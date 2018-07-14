@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSA2018_Hometask4", "BSA2018_Hometask4\BSA2018_Hometask4.csproj", "{F164BC18-364D-466A-95F0-1F4678EA6920}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D89F610F-CE5D-4302-9CE1-01940232A567} = {D89F610F-CE5D-4302-9CE1-01940232A567}
+		{7FFB4273-EF7D-4B0C-9B50-79AC222F1DA1} = {7FFB4273-EF7D-4B0C-9B50-79AC222F1DA1}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSA2018_Hometask4.DAL", "DAL\BSA2018_Hometask4.DAL.csproj", "{BC5AB149-2CB8-4956-B4E8-E98B6C8F972E}"
 EndProject
@@ -13,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSA2018_Hometask4.BLL", "BL
 		{BC5AB149-2CB8-4956-B4E8-E98B6C8F972E} = {BC5AB149-2CB8-4956-B4E8-E98B6C8F972E}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSA2018_Hometask4.Shared", "BSA2018_Hometask4.Shared\BSA2018_Hometask4.Shared.csproj", "{D89F610F-CE5D-4302-9CE1-01940232A567}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSA2018_Hometask4.Shared", "BSA2018_Hometask4.Shared\BSA2018_Hometask4.Shared.csproj", "{D89F610F-CE5D-4302-9CE1-01940232A567}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

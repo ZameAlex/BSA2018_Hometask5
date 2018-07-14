@@ -16,6 +16,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : DAL.
 
     public virtual void Create(TEntity entity)
     {
+        entity.Id = DbContext.SetOf<TEntity>().Count + 1;
         DbContext.SetOf<TEntity>().Add(entity);
 
     }
@@ -30,7 +31,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : DAL.
         DbContext.SetOf<TEntity>().RemoveAll(x => x.Id == id);
     }
 
-    public virtual System.Collections.Generic.IEnumerable<TEntity> Get()
+    public virtual System.Collections.Generic.List<TEntity> Get()
     {
        return DbContext.SetOf<TEntity>();
     }
