@@ -106,6 +106,7 @@ namespace BSA2018_Hometask4.DAL.DbContext
                        Birthday = new DateTime(1996, 1, 24)
                    }
                    );
+                context.SaveChanges();
             }
             #endregion
 
@@ -145,6 +146,7 @@ namespace BSA2018_Hometask4.DAL.DbContext
             }
                 }
                 );
+                context.SaveChanges();
             }
             #endregion
 
@@ -187,6 +189,7 @@ namespace BSA2018_Hometask4.DAL.DbContext
                        Price = 400m
                    }
                    );
+                context.SaveChanges();
             }
             #endregion
 
@@ -200,7 +203,7 @@ namespace BSA2018_Hometask4.DAL.DbContext
                     DestinationPoint = "Lviv",
                     DestinationTime = new DateTime(2018, 1, 1, 14, 0, 0),
                     Number = new Guid(),
-                    Tickets = new List<Ticket>()
+                    Tickets = context.Tickets.Where(x => x.Id < 2).ToList()
                 }
             );
 
@@ -211,7 +214,7 @@ namespace BSA2018_Hometask4.DAL.DbContext
                     DestinationPoint = "Berlin",
                     DestinationTime = new DateTime(2018, 1, 1, 17, 0, 0),
                     Number = new Guid(),
-                    Tickets = context.Tickets.Where(x => x.Id < 3).ToList()
+                    Tickets = context.Tickets.Where(x => x.Id ==2).ToList()
                 }
                 );
                 context.Flights.Add(new Flight
@@ -224,6 +227,7 @@ namespace BSA2018_Hometask4.DAL.DbContext
                     Tickets = context.Tickets.Where(x => x.Id >= 3).ToList()
                 }
                 );
+                context.SaveChanges();
             }
             #endregion
 
@@ -264,6 +268,7 @@ namespace BSA2018_Hometask4.DAL.DbContext
                         Speed = 900
                     }
                     );
+                context.SaveChanges();
             }
             #endregion
             context.SaveChanges();
@@ -306,9 +311,9 @@ namespace BSA2018_Hometask4.DAL.DbContext
                         Expired = new TimeSpan(0, 0, 0)
                     }
                     );
+                context.SaveChanges();
             }
             #endregion
-            context.SaveChanges();
             #region Departure initializing
             if (!context.Depatures.Any())
             {

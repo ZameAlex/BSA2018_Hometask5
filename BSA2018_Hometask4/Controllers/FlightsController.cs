@@ -29,7 +29,7 @@ namespace BSA2018_Hometask4.Controllers
             {
                 return Ok(service.Get());
             }
-            catch(Exception)
+            catch(Exception e)
             {
                 return NotFound();
             }
